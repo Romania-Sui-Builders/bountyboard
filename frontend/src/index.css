@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-surface-border;
+  }
+  
+  body {
+    @apply bg-obsidian-900 text-gray-100 font-body antialiased;
+    background-image: 
+      radial-gradient(ellipse at top, rgba(191, 0, 255, 0.05) 0%, transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(0, 245, 255, 0.03) 0%, transparent 50%);
+    min-height: 100vh;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-obsidian-800;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-surface-border rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-obsidian-500;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-surface-card/80 backdrop-blur-xl border border-surface-border rounded-2xl;
+  }
+
+  .neon-border {
+    position: relative;
+  }
+
+  .neon-border::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(0, 245, 255, 0.5), rgba(191, 0, 255, 0.5));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .neon-border:hover::before {
+    opacity: 1;
+  }
+
+  .btn-primary {
+    @apply px-6 py-3 bg-gradient-to-r from-neon-cyan to-neon-purple text-white font-display font-semibold rounded-xl
+           hover:shadow-neon-cyan transition-all duration-300 active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 bg-surface-card border border-surface-border text-gray-200 font-display font-medium rounded-xl
+           hover:bg-surface-hover hover:border-neon-cyan/30 transition-all duration-300;
+  }
+
+  .btn-ghost {
+    @apply px-4 py-2 text-gray-400 hover:text-neon-cyan hover:bg-surface-hover rounded-lg transition-all duration-200;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 bg-surface-dark border border-surface-border rounded-xl text-gray-100
+           placeholder:text-gray-500 focus:outline-none focus:border-neon-cyan/50 focus:ring-1 focus:ring-neon-cyan/20
+           transition-all duration-200;
+  }
+
+  .status-badge {
+    @apply px-3 py-1 text-xs font-mono font-medium rounded-full;
+  }
+
+  .kanban-column {
+    @apply flex flex-col min-w-[320px] max-w-[360px] bg-surface-dark/50 rounded-2xl p-4;
+  }
+
+  .task-card {
+    @apply glass-card p-4 cursor-pointer hover:bg-surface-hover transition-all duration-200
+           hover:translate-y-[-2px] hover:shadow-card;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-neon-cyan via-neon-purple to-neon-pink;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+}
