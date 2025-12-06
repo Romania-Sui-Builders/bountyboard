@@ -1,0 +1,39 @@
+name: Deploy frontend → GitHub Pages
+
+# run on pushes to main (only when frontend/ changed)
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'frontend/**'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # needed by the deploy action to push to gh-pages
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'npm'
+
+      - name: Install dependencies (frontend)
+        working-directory: frontend
+        run: npm ci
+
+      - name: Build frontend
+        working-directory: frontend
+        run: npm run build
+
+      - name: Deploy to GitHub Pages (gh-pages)
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: main               # the branch the action will push to
+          folder: frontend/build         # <- change to frontend/dist if using Vite
+          clean: true
+          token: ${{ secrets.GITHUB_TOKEN }}

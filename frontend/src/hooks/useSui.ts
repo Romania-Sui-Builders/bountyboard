@@ -1,7 +1,7 @@
 import { useCurrentAccount, useSuiClient, useSignAndExecuteTransaction } from '@mysten/dapp-kit';
 import { Transaction } from '@mysten/sui/transactions';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { PACKAGE_ID, MODULE_NAME, FUNCTIONS, OBJECT_TYPES, ROLES } from '../constants';
+import { PACKAGE_ID, MODULE_NAME, FUNCTIONS, OBJECT_TYPES} from '../constants';
 import type { Board, Task, AdminCap, ContributorCap } from '../types';
 
 // Helper to parse on-chain data

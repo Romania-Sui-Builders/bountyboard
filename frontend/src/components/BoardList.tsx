@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Plus, ChevronRight, Users, CheckCircle2, ListTodo, Loader2 } from 'lucide-react';
+import { Plus, ChevronRight, CheckCircle2, ListTodo, Loader2 } from 'lucide-react';
 import { useBoards } from '../hooks/useSui';
 import type { Board } from '../types';
 
@@ -19,10 +19,6 @@ export function BoardList({ onSelectBoard, onCreateBoard }: BoardListProps) {
     },
   };
 
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    show: { y: 0, opacity: 1 },
-  };
 
   if (isLoading) {
     return (

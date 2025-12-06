@@ -15,7 +15,7 @@ import {
 import { useBoard, useCapabilities, useUpdateTaskStatus } from '../hooks/useSui';
 import { getStatusColor, type Task } from '../types';
 import { getColumnColor } from '../constants';
-import { formatDistanceToNow, format } from 'date-fns';
+import { format } from 'date-fns';
 
 interface KanbanBoardProps {
   boardId: string;
@@ -240,7 +240,6 @@ interface KanbanColumnProps {
 function KanbanColumn({
   status,
   tasks,
-  colorGradient,
   isDropTarget,
   canContribute,
   onDragOver,
@@ -334,7 +333,6 @@ function TaskCard({
 }: TaskCardProps) {
   const [showSubtasks, setShowSubtasks] = useState(false);
   const [showStatusMenu, setShowStatusMenu] = useState(false);
-  const statusColor = getStatusColor(task.status);
   const isOverdue = task.dueDate > 0 && task.dueDate < Date.now();
 
   const handleStatusChange = (newStatus: string) => {
